@@ -201,15 +201,15 @@ private:
     Point tmpPubKey; // Temporary public key
     s_DES sdes; // The s-DES encryption system
     void genTempKey() {
-        printf("gen\n");
+        printf("gen");
         fflush(stdout);
         scanf("%lld", &tmpPriKey);
         tmpPubKey = G * tmpPriKey;
-        printf("pub_e {$%lld}, {$%lld}\n", tmpPubKey.x.val, tmpPubKey.y.val);
+        printf("pub_e {$%lld}, {$%lld}", tmpPubKey.x.val, tmpPubKey.y.val);
         fflush(stdout);
     }
     void requestTempKey(ECDHE &other) {
-        printf("req_e\n");
+        printf("req_e");
         fflush(stdout);
         scanf("%lld %lld", &other.tmpPubKey.x.val, &other.tmpPubKey.y.val);
     }
@@ -219,15 +219,15 @@ public:
         G.y = y;
     }
     void genPermKey() {
-        printf("gen\n");
+        printf("gen");
         fflush(stdout);
         scanf("%lld", &priKey);
         pubKey = G * priKey;
-        printf("pub_s {$%lld}, {$%lld}\n", pubKey.x.val, pubKey.y.val);
+        printf("pub_s {$%lld}, {$%lld}", pubKey.x.val, pubKey.y.val);
         fflush(stdout);
     }
     void requestPermKey(ECDHE &other) {
-        printf("req_s\n");
+        printf("req_s");
         fflush(stdout);
         scanf("%lld %lld", &other.pubKey.x.val, &other.pubKey.y.val);
     }
@@ -235,7 +235,7 @@ public:
         requestTempKey(other);
         Point K_x = other.tmpPubKey * priKey;
         uint16_t key = (K_x.x.val ^ K_x.y.val) & 0x4ff;
-        printf("req_m\n");
+        printf("req_m");
         fflush(stdout);
         scanf("%s", msg);
         sdes.decrypt_message(msg, key);
@@ -245,7 +245,7 @@ public:
         Point K_x = other.pubKey * tmpPriKey;
         uint16_t key = (K_x.x.val ^ K_x.y.val) & 0x4ff;
         sdes.encrypt_message(msg, key, cipherText);
-        printf("send {$%s}\n", cipherText);
+        printf("send {$%s}", cipherText);
         fflush(stdout);
     }
 };
@@ -285,7 +285,7 @@ int main() {
         Bob.sendMsg(Alice, msgSnd);
         fflush(stdout);
     }
-    printf("exit\n");
+    printf("exit");
     fflush(stdout);
     return 0;
 }
