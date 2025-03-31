@@ -285,7 +285,7 @@ int main() {
         Bob.sendMsg(Alice, msgSnd);
         fflush(stdout);
     }
-    sprintf(msgSnd, "exit");
-    Bob.sendMsg(Alice, msgSnd);
+    printf("exit\n");
+    fflush(stdout);
     return 0;
 }
