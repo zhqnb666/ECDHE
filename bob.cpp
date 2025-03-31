@@ -177,6 +177,7 @@ public:
             uint8_t c = encrypt(m[i / 2]);
             toHex(c, C + i);
         }
+        C[2 * len] = '\0';
     }
     void decrypt_message(char *m, const uint32_t &key) {
         setKey(key);
@@ -284,5 +285,7 @@ int main() {
         Bob.sendMsg(Alice, msgSnd);
         fflush(stdout);
     }
+    sprintf(msgSnd, "exit");
+    Bob.sendMsg(Alice, msgSnd);
     return 0;
 }
