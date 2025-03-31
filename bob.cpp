@@ -234,7 +234,7 @@ public:
     void receiveMsg(ECDHE &other, char *msg) {
         requestTempKey(other);
         Point K_x = other.tmpPubKey * priKey;
-        uint16_t key = (K_x.x.val ^ K_x.y.val) & 0x4ff;
+        uint16_t key = (K_x.x.val ^ K_x.y.val) & 0x3ff;
         printf("req_m\n");
         fflush(stdout);
         scanf("%s", msg);
@@ -243,7 +243,9 @@ public:
     void sendMsg(ECDHE &other, char *msg) {
         genTempKey();
         Point K_x = other.pubKey * tmpPriKey;
-        uint16_t key = (K_x.x.val ^ K_x.y.val) & 0x4ff;
+        // printf("ShareKey %lld %lld\n", K_x.x.val, K_x.y.val);
+        uint16_t key = (K_x.x.val ^ K_x.y.val) & 0x3ff;
+        // printf("Key %d\n", key);
         sdes.encrypt_message(msg, key, cipherText);
         printf("send %s\n", cipherText);
         fflush(stdout);
@@ -279,6 +281,7 @@ int main() {
     Bob.receiveMsg(Alice, msgRcv);
     int q = atoi(msgRcv);
     Bob.sendMsg(Alice, msgRcv);
+    // printf("q = %d\n", q);
     while (q--) {
         Bob.receiveMsg(Alice, msgRcv);
         convert();
