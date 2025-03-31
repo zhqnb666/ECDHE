@@ -18,7 +18,7 @@ using namespace std;
 #define CONCAT(x, y) (((x) << 4) | (y))
 #define Theta(x) ((((x) >> 4) & 0x0F) | (((x) & 0x0F) << 4))
 typedef long long ll;
-const int L = 1e6 + 5;
+const int L = 2e6 + 5;
 ll a, b, p, x_g, y_g; // The parameters of an elliptic curve and the generator point G = (x_g, y_g)
 char msgRcv[L], msgSnd[L], cipherText[L];
 int cnt[256];
